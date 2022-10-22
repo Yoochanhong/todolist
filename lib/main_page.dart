@@ -31,6 +31,9 @@ class _MainPageState extends State<MainPage> {
                     child: TextField(
                       controller: controller,
                       keyboardType: TextInputType.text,
+                      decoration: InputDecoration(
+                        hintText: '텍스트를 입력해주세요',
+                      ),
                     ),
                   ),
                   ElevatedButton(
