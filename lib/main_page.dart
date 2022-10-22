@@ -10,6 +10,7 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   var firestore = FirebaseFirestore.instance;
+  var collection = 'todo';
   TextEditingController controller = TextEditingController();
 
   @override
@@ -33,7 +34,11 @@ class _MainPageState extends State<MainPage> {
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      firestore.collection(collection).doc(controller.text).set({
+                        'title': controller.text
+                      });
+                    },
                     child: const Text(
                       '입력',
                       style: TextStyle(
