@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:todolist/list_card.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -15,6 +16,7 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
+    final DocumentSnapshot documentSnapshot;
     return Scaffold(
       appBar: AppBar(
         title: Text('투두리스트'),
@@ -23,33 +25,47 @@ class _MainPageState extends State<MainPage> {
         child: Center(
           child: Column(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  SizedBox(
-                    width: 250.0,
-                    child: TextField(
-                      controller: controller,
-                      keyboardType: TextInputType.text,
-                      decoration: InputDecoration(
-                        hintText: '텍스트를 입력해주세요',
+              SizedBox(
+                width: 300,
+                height: 500,
+                child: ListView.builder(
+                  itemCount: 30,
+                  itemBuilder: (BuildContext context, int index){
+                    return ListCard(title: '엄');
+                  },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 30),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    SizedBox(
+                      width: 250.0,
+                      child: TextField(
+                        controller: controller,
+                        keyboardType: TextInputType.text,
+                        decoration: InputDecoration(
+                          hintText: '텍스트를 입력해주세요',
+                        ),
                       ),
                     ),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      firestore.collection(collection).doc(controller.text).set({
-                        'title': controller.text
-                      });
-                    },
-                    child: const Text(
-                      '입력',
-                      style: TextStyle(
-                        fontSize: 16,
+                    ElevatedButton(
+                      onPressed: () {
+                        firestore
+                            .collection(collection)
+                            .doc(controller.text)
+                            .set({'title': controller.text});
+                      },
+                      child: const Text(
+                        '입력',
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ],
           ),
