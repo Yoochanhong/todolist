@@ -25,16 +25,23 @@ class _MainPageState extends State<MainPage> {
         child: Center(
           child: Column(
             children: [
-              SizedBox(
-                width: 300,
-                height: 500,
-                child: ListView.builder(
-                  itemCount: 30,
-                  itemBuilder: (BuildContext context, int index){
-                    return ListCard(title: '엄');
-                  },
-                ),
-              ),
+              StreamBuilder<QuerySnapshot>(
+                  stream: firestore.collection(collection).snapshots(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return CircularProgressIndicator();
+                    }
+                    return SizedBox(
+                      width: 300,
+                      height: 500,
+                      child: ListView.builder(
+                        itemCount: snapshot.data!.docs.length,
+                        itemBuilder: (context, index){
+                          return ListCard(title: snapshot.data!.docs[index]['title'].toString());
+                        },
+                      ),
+                    );
+                  }),
               Padding(
                 padding: const EdgeInsets.only(top: 30),
                 child: Row(
