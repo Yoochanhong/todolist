@@ -63,6 +63,7 @@ class _MainPageState extends State<MainPage> {
                             .collection(collection)
                             .doc(controller.text)
                             .set({'title': controller.text});
+                        controller.clear();
                       },
                       child: const Text(
                         '입력',
