@@ -28,8 +28,17 @@ class ListCard extends StatelessWidget {
                     ),
                   ),
                   actions: [
-                    ElevatedButton(onPressed: () {}, child: Text('예')),
-                    ElevatedButton(onPressed: () {}, child: Text('아니오')),
+                    ElevatedButton(
+                        onPressed: () {
+                          firescore.collection(collection).doc(doc).delete();
+                          Navigator.of(context).pop();
+                        },
+                        child: Text('예')),
+                    ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Text('아니오')),
                   ],
                 );
               });
