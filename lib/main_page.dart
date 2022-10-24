@@ -36,8 +36,13 @@ class _MainPageState extends State<MainPage> {
                       height: 500,
                       child: ListView.builder(
                         itemCount: snapshot.data!.docs.length,
-                        itemBuilder: (context, index){
-                          return ListCard(title: snapshot.data!.docs[index]['title'].toString());
+                        itemBuilder: (context, index) {
+                          return ListCard(
+                            title:
+                                snapshot.data!.docs[index]['title'].toString(),
+                            collection: collection,
+                            doc: snapshot.data!.docs[index]['title'].toString(),
+                          );
                         },
                       ),
                     );
