@@ -14,7 +14,7 @@ class ListCard extends StatelessWidget {
     return Container(
       height: 80,
       child: GestureDetector(
-        onLongPress: () {
+        onHorizontalDragEnd: (DragEndDetails dragEndDetails){
           showDialog(
               context: context,
               builder: (BuildContext context) {
@@ -42,6 +42,8 @@ class ListCard extends StatelessWidget {
                   ],
                 );
               });
+        },
+        onLongPress: () {
         },
         child: Card(
           child: Padding(
