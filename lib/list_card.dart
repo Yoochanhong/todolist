@@ -6,8 +6,9 @@ class ListCard extends StatelessWidget {
 
   var title;
   var collection;
-  var firescore = FirebaseFirestore.instance;
+  var firestore = FirebaseFirestore.instance;
   var doc;
+  TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +31,7 @@ class ListCard extends StatelessWidget {
                   actions: [
                     ElevatedButton(
                         onPressed: () {
-                          firescore.collection(collection).doc(doc).delete();
+                          firestore.collection(collection).doc(doc).delete();
                           Navigator.of(context).pop();
                         },
                         child: Text('예')),
@@ -65,8 +66,11 @@ class ListCard extends StatelessWidget {
                               builder: (BuildContext context) {
                                 return AlertDialog(
                                   content: SingleChildScrollView(
-                                    child: Text(
-                                      'wwwwhtattt?',
+                                    child: TextField(
+                                      controller: controller,
+                                      decoration: InputDecoration(
+                                        hintText: title,
+                                      ),
                                       style: TextStyle(
                                         fontSize: 20,
                                       ),
@@ -77,12 +81,7 @@ class ListCard extends StatelessWidget {
                                         onPressed: () {
                                           Navigator.of(context).pop();
                                         },
-                                        child: Text('예')),
-                                    ElevatedButton(
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                        child: Text('아니오')),
+                                        child: Text('확인')),
                                   ],
                                 );
                               });
