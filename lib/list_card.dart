@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:todolist/card_update.dart';
 
 class ListCard extends StatelessWidget {
   ListCard({required this.title, required this.collection, this.doc});
@@ -61,14 +60,32 @@ class ListCard extends StatelessWidget {
                     ElevatedButton(
                         onPressed: () {
                           Navigator.of(context).pop();
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
+                          showDialog(
+                              context: context,
                               builder: (BuildContext context) {
-                                return CardUpdate();
-                              },
-                            ),
-                          );
+                                return AlertDialog(
+                                  content: SingleChildScrollView(
+                                    child: Text(
+                                      'wwwwhtattt?',
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                  ),
+                                  actions: [
+                                    ElevatedButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: Text('예')),
+                                    ElevatedButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: Text('아니오')),
+                                  ],
+                                );
+                              });
                         },
                         child: Text('예')),
                     ElevatedButton(
