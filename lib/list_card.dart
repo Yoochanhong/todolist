@@ -44,6 +44,32 @@ class ListCard extends StatelessWidget {
               });
         },
         onLongPress: () {
+          showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  content: SingleChildScrollView(
+                    child: Text(
+                      '수정하시겠습니까?',
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
+                    ),
+                  ),
+                  actions: [
+                    ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Text('예')),
+                    ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Text('아니오')),
+                  ],
+                );
+              });
         },
         child: Card(
           child: Padding(
