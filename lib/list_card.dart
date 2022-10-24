@@ -60,6 +60,7 @@ class ListCard extends StatelessWidget {
                   actions: [
                     ElevatedButton(
                         onPressed: () {
+                          Navigator.of(context).pop();
                           Navigator.push(
                             context,
                             MaterialPageRoute(
