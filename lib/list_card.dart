@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:todolist/card_update.dart';
 
 class ListCard extends StatelessWidget {
   ListCard({required this.title, required this.collection, this.doc});
@@ -14,7 +15,7 @@ class ListCard extends StatelessWidget {
     return Container(
       height: 80,
       child: GestureDetector(
-        onHorizontalDragEnd: (DragEndDetails dragEndDetails){
+        onHorizontalDragEnd: (DragEndDetails dragEndDetails) {
           showDialog(
               context: context,
               builder: (BuildContext context) {
@@ -59,7 +60,14 @@ class ListCard extends StatelessWidget {
                   actions: [
                     ElevatedButton(
                         onPressed: () {
-                          Navigator.of(context).pop();
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (BuildContext context) {
+                                return CardUpdate();
+                              },
+                            ),
+                          );
                         },
                         child: Text('예')),
                     ElevatedButton(
