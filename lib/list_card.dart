@@ -14,7 +14,7 @@ class ListCard extends StatelessWidget {
     return Container(
       height: 80,
       child: GestureDetector(
-        onHorizontalDragEnd: (DragEndDetails dragEndDetails) {
+        onHorizontalDragEnd: (DragEndDetails dragEndDetails){
           showDialog(
               context: context,
               builder: (BuildContext context) {
@@ -32,60 +32,6 @@ class ListCard extends StatelessWidget {
                         onPressed: () {
                           firescore.collection(collection).doc(doc).delete();
                           Navigator.of(context).pop();
-                        },
-                        child: Text('예')),
-                    ElevatedButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: Text('아니오')),
-                  ],
-                );
-              });
-        },
-        onLongPress: () {
-          showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  content: SingleChildScrollView(
-                    child: Text(
-                      '수정하시겠습니까?',
-                      style: TextStyle(
-                        fontSize: 20,
-                      ),
-                    ),
-                  ),
-                  actions: [
-                    ElevatedButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                          showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  content: SingleChildScrollView(
-                                    child: Text(
-                                      'wwwwhtattt?',
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                      ),
-                                    ),
-                                  ),
-                                  actions: [
-                                    ElevatedButton(
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                        child: Text('예')),
-                                    ElevatedButton(
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                        child: Text('아니오')),
-                                  ],
-                                );
-                              });
                         },
                         child: Text('예')),
                     ElevatedButton(
