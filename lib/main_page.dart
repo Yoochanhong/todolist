@@ -28,7 +28,16 @@ class _MainPageState extends State<MainPage> {
                     streamSnapshot.data!.docs[index];
                 return Card(
                   child: ListTile(
-                    title: Text(documentSnapshot['what']),
+                    title: Text(documentSnapshot['title']),
+                    trailing: SizedBox(
+                      width: 100,
+                      child: Row(
+                        children: [
+                          IconButton(onPressed: () {}, icon: Icon(Icons.edit)),
+                          IconButton(onPressed: () {}, icon: Icon(Icons.restore_from_trash))
+                        ],
+                      ),
+                    ),
                   ),
                 );
               },
