@@ -10,7 +10,7 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  var product = FirebaseFirestore.instance.collection('items');
+  CollectionReference product = FirebaseFirestore.instance.collection('items');
   TextEditingController controller = TextEditingController();
 
   @override
@@ -20,12 +20,23 @@ class _MainPageState extends State<MainPage> {
         stream: product.snapshots(),
         builder: (BuildContext context,
             AsyncSnapshot<QuerySnapshot> streamSnapshot) {
-          if (streamSnapshot.hasData){
-            return ListView.builder(itemBuilder: (BuildContext context, int index){
-              return Text('what');
-            });
+          if (streamSnapshot.hasData) {
+            return ListView.builder(
+              itemCount: streamSnapshot.data!.docs.length,
+              itemBuilder: (context, index) {
+                final DocumentSnapshot documentSnapshot =
+                    streamSnapshot.data!.docs[index];
+                return Card(
+                  child: ListTile(
+                    title: Text(documentSnapshot['what']),
+                  ),
+                );
+              },
+            );
           }
-          return Center(child: CircularProgressIndicator());
+          return Center(
+            child: CircularProgressIndicator(),
+          );
         },
       ),
     );
