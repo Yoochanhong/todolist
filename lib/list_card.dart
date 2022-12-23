@@ -2,12 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class ListCard extends StatelessWidget {
-  ListCard({required this.title, required this.collection, this.doc});
+  ListCard({required this.title});
 
   var title;
-  var collection;
-  var firescore = FirebaseFirestore.instance;
-  var doc;
+  var product = FirebaseFirestore.instance.collection('items');
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +28,7 @@ class ListCard extends StatelessWidget {
                   actions: [
                     ElevatedButton(
                         onPressed: () {
-                          firescore.collection(collection).doc(doc).delete();
+                          //product.doc(doc).delete();
                           Navigator.of(context).pop();
                         },
                         child: Text('예')),
