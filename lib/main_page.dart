@@ -15,43 +15,51 @@ class _MainPageState extends State<MainPage> {
 
   Future<void> _update(DocumentSnapshot documentSnapshot) async {
     controller.text = documentSnapshot['title'];
-    await showModalBottomSheet(
-        context: context,
-        builder: (BuildContext context) {
-          return SizedBox(
-            child: Padding(
-              padding: EdgeInsets.only(
-                  top: 20,
-                  left: 20,
-                  right: 20,
-                  bottom: MediaQuery
-                      .of(context)
-                      .viewInsets
-                      .bottom),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  TextField(
-                    controller: controller,
-                    decoration: InputDecoration(labelText: 'title'),
-                  ),
-                  SizedBox(height: 20),
-                  ElevatedButton(
-                      onPressed: () async {
-                        final String name = controller.text;
-                        product
-                            .doc(documentSnapshot.id)
-                            .update({"title": name});
-                        controller.text = "";
-                        Navigator.of(context).pop();
-                      },
-                      child: Text('업데이트')),
-                ],
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: SingleChildScrollView(
+            child: Card(
+              child: TextField(
+                controller: controller,
+                decoration: InputDecoration(
+                  hintText: controller.text,
+                ),
               ),
             ),
-          );
-        });
+          ),
+          actions: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text(
+                    '취소',
+                    style: TextStyle(fontSize: 15.0),
+                  ),
+                ),
+                TextButton(
+                  onPressed: () async {
+                    final String title = controller.text;
+                    product.doc(documentSnapshot.id).update({"title": title});
+                    controller.text = "";
+                    Navigator.of(context).pop();
+                  },
+                  child: Text(
+                    '확인',
+                    style: TextStyle(fontSize: 15.0),
+                  ),
+                ),
+              ],
+            )
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -66,7 +74,7 @@ class _MainPageState extends State<MainPage> {
               itemCount: streamSnapshot.data!.docs.length,
               itemBuilder: (context, index) {
                 final DocumentSnapshot documentSnapshot =
-                streamSnapshot.data!.docs[index];
+                    streamSnapshot.data!.docs[index];
                 return Card(
                   child: ListTile(
                     title: Text(documentSnapshot['title']),
@@ -74,9 +82,11 @@ class _MainPageState extends State<MainPage> {
                       width: 100,
                       child: Row(
                         children: [
-                          IconButton(onPressed: () {
-                            _update(documentSnapshot);
-                          }, icon: Icon(Icons.edit)),
+                          IconButton(
+                              onPressed: () {
+                                _update(documentSnapshot);
+                              },
+                              icon: Icon(Icons.edit)),
                           IconButton(
                               onPressed: () {},
                               icon: Icon(Icons.restore_from_trash))
