@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:todolist/list_card.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -37,7 +36,7 @@ class _MainPageState extends State<MainPage> {
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child: Text(
+                  child: const Text(
                     '취소',
                     style: TextStyle(fontSize: 15.0),
                   ),
@@ -49,7 +48,7 @@ class _MainPageState extends State<MainPage> {
                     controller.text = "";
                     Navigator.of(context).pop();
                   },
-                  child: Text(
+                  child: const Text(
                     '확인',
                     style: TextStyle(fontSize: 15.0),
                   ),
@@ -86,10 +85,10 @@ class _MainPageState extends State<MainPage> {
                               onPressed: () {
                                 _update(documentSnapshot);
                               },
-                              icon: Icon(Icons.edit)),
+                              icon: const Icon(Icons.edit)),
                           IconButton(
                               onPressed: () {},
-                              icon: Icon(Icons.restore_from_trash))
+                              icon: const Icon(Icons.restore_from_trash))
                         ],
                       ),
                     ),
@@ -98,7 +97,7 @@ class _MainPageState extends State<MainPage> {
               },
             );
           }
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         },
